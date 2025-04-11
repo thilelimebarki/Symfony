@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello BlogController!
+{% endblock %}
+
+{% block body %}
+	<div class ="example-wrapper">
+	<h1> {{ titre }}</h1>
+	<div class="d-flex">
+	{% for article in articles %}
+	<div class="card" style="width: 18rem;">
+	
+    	<a href="{{path('app_article', {'id': article.id})}}" class="btn btn-danger">
+	<img src='{{ asset ("uploads/" ~ article.getUrlImg) }}' class="card-img-top" alt="{{article.title}}">	
+	</a> 
+	<div class="card-body">	
+    	<h5 class="card-title">{{article.title}}</h5>
+    	<p class="card-text">{{article.content}}</p>
+		{% if app.user == article.user %}
+
+    	<a href="{{path('app_supp', {'id': article.id})}}" class="btn btn-danger">supprimer</a>
+		<a href="{{path('app_updt', {'id': article.id})}}" class="btn btn-warning">Modifier</a>
+		{# <a href="{{path('app_supp', {'id': article.id})}}" class="btn btn-secondary">Commenter</a> #}
+
+
+		{% endif %}
+
+		    {# { {{form_start(form)}} }
+
+    		{ {{form_end(form)}} } #}
+		
+	</div>
+	</div>
+		
+	{% endfor %}
+	</div>
+	</div>
+{% endblock %}

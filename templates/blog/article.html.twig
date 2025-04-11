@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Hello BlogController!
+{% endblock %}
+
+{% block body %}
+	<div class="example-wrapper">
+		<div class="d-flex">
+
+			<div class="card" style="width: 18rem;">
+				<img src='{{ asset ("uploads/" ~ article.getUrlImg) }}' class="card-img-top" alt="{{article.title}}">
+				<div class="card-body">
+					<h5 class="card-title">
+						{{article.title}}
+					</h5>
+					<p class="card-text">
+						{{article.content}}
+					</p>
+
+					{% if app.user != article.user %}
+
+						<h4>
+							Ajouter un commentaire :
+						</h4>
+
+						{{form_start(form)}}
+
+						{{form_end(form)}}
+
+
+					{% endif %}
+
+					<h4>
+						Commentaires :
+					</h4>
+
+					{% for comment in comments %}
+						<div class="card my-2">
+							<div class="card-body">
+								{{ comment.content }}
+							</div>
+						</div>
+					{% else %}
+						<p>
+							Aucun commentaire précedent pour cet article.
+						</p>
+					{% endfor %}
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+{% endblock %}
